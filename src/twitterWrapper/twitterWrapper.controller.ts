@@ -1,11 +1,15 @@
-import { Controller, Post, Param, Body } from '@nestjs/common';
+import { Controller, Post, Param, Body, Inject } from '@nestjs/common';
 import { TwitterWrapperService } from './twitterWrapper.service';
 import { TweetDto } from '../common/tweet.dto';
 import { RequestOptionsDto } from '../common/requestOptions.dto';
+import { TWITTER_WRAPPER_SERVICE } from '../common/consts';
 
 @Controller('tweet')
 export class TwitterWrapperController {
-  constructor(private twitterWrapperService: TwitterWrapperService) {}
+  constructor(
+    @Inject(TWITTER_WRAPPER_SERVICE)
+    private twitterWrapperService: TwitterWrapperService,
+  ) {}
 
   @Post(':hashtag')
   public async findTweetsByHashtag(
