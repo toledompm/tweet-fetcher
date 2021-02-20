@@ -1,7 +1,7 @@
 import { Controller, Post, Param, Body, Inject } from '@nestjs/common';
-import { TwitterWrapperService } from './twitterWrapper.service';
-import { TweetDto } from '../common/tweet.dto';
-import { RequestOptionsDto } from '../common/requestOptions.dto';
+import { TwitterWrapperService } from './twitterWrapperService';
+import { TweetDto } from '../common/tweetDto';
+import { RequestOptionsDto } from '../common/requestOptionsDto';
 import { TWITTER_WRAPPER_SERVICE } from '../common/consts';
 
 @Controller('tweet')

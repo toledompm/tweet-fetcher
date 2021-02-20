@@ -1,5 +1,5 @@
-import { RequestOptionsDto } from '../common/requestOptions.dto';
-import { TweetDto } from '../common/tweet.dto';
+import { RequestOptionsDto } from '../common/requestOptionsDto';
+import { TweetDto } from '../common/tweetDto';
 
 export interface TwitterWrapperService {
   getTweetByHashtag(

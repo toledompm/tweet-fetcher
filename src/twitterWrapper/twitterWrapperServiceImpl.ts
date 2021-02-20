@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { TwitterWrapperService } from './twitterWrapper.service';
-import { RequestOptionsDto } from '../common/requestOptions.dto';
-import { TweetDto } from '../common/tweet.dto';
+import { TwitterWrapperService } from './twitterWrapperService';
+import { RequestOptionsDto } from '../common/requestOptionsDto';
+import { TweetDto } from '../common/tweetDto';
 
 @Injectable()
 export class TwitterWrapperServiceImpl implements TwitterWrapperService {

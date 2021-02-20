@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TwitterModule } from './twitterWrapper/twitterWrapper.module';
+import { TwitterModule } from './twitterWrapper/twitterWrapperModule';
 
 @Module({
   imports: [TwitterModule],

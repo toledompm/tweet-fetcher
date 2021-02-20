@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { TwitterWrapperController } from './twitterWrapper.controller';
-import { TwitterWrapperServiceImpl } from './twitterWrapper.serviceImpl';
+import { TwitterWrapperController } from './twitterWrapperController';
+import { TwitterWrapperServiceImpl } from './twitterWrapperServiceImpl';
 import { TWITTER_WRAPPER_SERVICE } from '../common/consts';
 
 @Module({
