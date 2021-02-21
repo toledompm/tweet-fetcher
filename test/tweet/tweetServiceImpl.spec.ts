@@ -9,7 +9,7 @@ import {
   TWEET_SERVICE,
   TWEET_REPOSITORY,
   HASHTAG_REPOSITORY,
-  TWEET_HASHTAGS_REPOSITORY,
+  TWEET_HASHTAG_REPOSITORY,
 } from '../../src/common/consts';
 import { TweetRepositoryMock } from '../mocks/tweetRepositoryMock';
 import { TweetHashtagRepositoryMock } from '../mocks/tweetHashtagRepositoryMock';
@@ -37,7 +37,7 @@ describe('TweetServiceImpl', () => {
           useClass: TweetHashtagRepositoryMock,
         },
         {
-          provide: TWEET_HASHTAGS_REPOSITORY,
+          provide: TWEET_HASHTAG_REPOSITORY,
           useClass: HashtagRepositoryMock,
         },
       ],
@@ -49,11 +49,11 @@ describe('TweetServiceImpl', () => {
       HASHTAG_REPOSITORY,
     );
     hashtagRepository = moduleRef.get<HashtagRepository>(
-      TWEET_HASHTAGS_REPOSITORY,
+      TWEET_HASHTAG_REPOSITORY,
     );
 
     tweetRepository.save = jest.fn(tweetRepository.save);
-    tweetHashtagRepository.save = jest.fn(tweetRepository.save);
+    tweetHashtagRepository.save = jest.fn(tweetHashtagRepository.save);
     hashtagRepository.save = jest.fn(hashtagRepository.save);
   });
 

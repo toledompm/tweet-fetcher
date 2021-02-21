@@ -10,7 +10,7 @@ import { HashtagRepository } from './db/hashtagRepository';
 import {
   TWEET_REPOSITORY,
   HASHTAG_REPOSITORY,
-  TWEET_HASHTAGS_REPOSITORY,
+  TWEET_HASHTAG_REPOSITORY,
 } from '../common/consts';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class TweetServiceImpl implements TweetService {
     private tweetRepository: TweetRepository,
     @Inject(HASHTAG_REPOSITORY)
     private hashtagRepository: HashtagRepository,
-    @Inject(TWEET_HASHTAGS_REPOSITORY)
+    @Inject(TWEET_HASHTAG_REPOSITORY)
     private tweetHashtagRepository: TweetHashtagRepository,
   ) {}
 
