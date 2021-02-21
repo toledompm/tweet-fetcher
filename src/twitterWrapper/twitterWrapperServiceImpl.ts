@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { TwitterWrapperService } from './twitterWrapperService';
 import { RequestOptionsDto } from '../common/requestOptionsDto';
-import { TweetDto } from '../common/tweet/tweetDto';
+import { TweetDto } from '../tweet/tweetDto';
 
 @Injectable()
 export class TwitterWrapperServiceImpl implements TwitterWrapperService {
@@ -10,9 +10,9 @@ export class TwitterWrapperServiceImpl implements TwitterWrapperService {
     options: RequestOptionsDto,
   ): Promise<TweetDto> {
     return Promise.resolve({
-      author: 'test',
+      twitterId: 1234,
       body: 'this is a tweet',
-      hashtags: [hashtag],
+      hashtags: [{ hashtag: { text: hashtag }, searchHashtag: true }],
     });
   }
 }

@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { TwitterWrapperService } from '../../src/twitterWrapper/twitterWrapperService';
 import { TwitterWrapperServiceImpl } from '../../src/twitterWrapper/twitterWrapperServiceImpl';
-import { TweetDto } from '../../src/common/tweet/tweetDto';
+import { TweetDto } from '../../src/tweet/tweetDto';
 import { RequestOptionsDto } from '../../src/common/requestOptionsDto';
 import { TWITTER_WRAPPER_SERVICE } from '../../src/common/consts';
 
@@ -37,7 +37,7 @@ describe('TwitterWrapperServiceImpl', () => {
     it('should return a tweet containing the hashtag', async () => {
       expect(tweet).toEqual(
         expect.objectContaining({
-          hashtags: [hashtag],
+          hashtags: [{ hashtag: { text: hashtag }, searchHashtag: true }],
         }),
       );
     });

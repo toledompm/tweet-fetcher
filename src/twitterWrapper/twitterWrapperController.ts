@@ -1,6 +1,6 @@
 import { Controller, Post, Param, Body, Inject } from '@nestjs/common';
 import { TwitterWrapperService } from './twitterWrapperService';
-import { TweetDto } from '../common/tweet/tweetDto';
+import { TweetDto } from '../tweet/tweetDto';
 import { RequestOptionsDto } from '../common/requestOptionsDto';
 import { TWITTER_WRAPPER_SERVICE } from '../common/consts';
 

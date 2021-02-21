@@ -8,6 +8,7 @@ export class createTweetHashtagTable1613915925443
           id serial PRIMARY KEY,
           tweet_id bigint,
           hashtag_id bigint,
+          search_hashtag boolean DEFAULT false,
 
           FOREIGN KEY (tweet_id)
             REFERENCES tweets (id),
