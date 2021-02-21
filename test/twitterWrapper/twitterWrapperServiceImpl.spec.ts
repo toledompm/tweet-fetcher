@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { TwitterWrapperService } from '../../src/twitterWrapper/twitterWrapperService';
 import { TwitterWrapperServiceImpl } from '../../src/twitterWrapper/twitterWrapperServiceImpl';
-import { TweetDto } from '../../src/common/tweetDto';
+import { TweetDto } from '../../src/common/tweet/tweetDto';
 import { RequestOptionsDto } from '../../src/common/requestOptionsDto';
 import { TWITTER_WRAPPER_SERVICE } from '../../src/common/consts';
 
