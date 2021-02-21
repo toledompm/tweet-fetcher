@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TweetEntity } from './db/tweet.entity';
-import { TweetHashtagEntity } from './db/tweetHashtag.entity';
-import { HashtagEntity } from './db/hashtag.entity';
+import { Tweet } from './db/tweet.entity';
+import { TweetHashtag } from './db/tweetHashtag.entity';
+import { Hashtag } from './db/hashtag.entity';
 import { TweetServiceImpl } from './tweetServiceImpl';
 import { TweetRepositoryImpl } from './db/tweetRepositoryImpl';
 import { HashtagRepositoryImpl } from './db/hashtagRepositoryImpl';
@@ -42,9 +42,9 @@ const allProviders = () => {
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([TweetEntity, TweetHashtagEntity, HashtagEntity]),
+    TypeOrmModule.forFeature([Tweet, TweetHashtag, Hashtag]),
   ],
   providers: allProviders(),
-  exports: exportedProviders,
+  exports: allProviders(),
 })
 export class TweetModule {}

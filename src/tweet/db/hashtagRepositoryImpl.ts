@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
-import { HashtagEntity } from './hashtag.entity';
+import { Hashtag } from './hashtag.entity';
 import { HashtagRepository } from './hashtagRepository';
 
 export class HashtagRepositoryImpl
-  extends Repository<HashtagEntity>
+  extends Repository<Hashtag>
   implements HashtagRepository {}

@@ -1,4 +1,4 @@
-import { Controller, Post, Param, Inject } from '@nestjs/common';
+import { Controller, Get, Param, Inject } from '@nestjs/common';
 import { TwitterWrapperService } from './twitterWrapperService';
 import { TweetDto } from '../tweet/tweetDto';
 import { TWITTER_WRAPPER_SERVICE } from '../common/consts';
@@ -10,7 +10,7 @@ export class TwitterWrapperController {
     private twitterWrapperService: TwitterWrapperService,
   ) {}
 
-  @Post(':hashtag')
+  @Get(':hashtag')
   public async findTweetsByHashtag(
     @Param('hashtag') hashtag: string,
   ): Promise<TweetDto> {

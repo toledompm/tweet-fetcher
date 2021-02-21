@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
-import { TweetHashtagEntity } from './tweetHashtag.entity';
+import { TweetHashtag } from './tweetHashtag.entity';
 import { TweetHashtagRepository } from './tweetHashtagRepository';
 
 export class TweetHashtagRepositoryImpl
-  extends Repository<TweetHashtagEntity>
+  extends Repository<TweetHashtag>
   implements TweetHashtagRepository {}

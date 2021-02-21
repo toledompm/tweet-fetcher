@@ -1,6 +1,6 @@
 import { HashtagDto } from '../hashtagDto';
-import { HashtagEntity } from './hashtag.entity';
+import { Hashtag } from './hashtag.entity';
 
 export interface HashtagRepository {
-  save(hashtag: HashtagDto): Promise<HashtagEntity>;
+  save(hashtag: HashtagDto): Promise<Hashtag>;
 }

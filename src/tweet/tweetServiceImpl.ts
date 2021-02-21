@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { TweetService } from './tweetService';
 import { TweetDto } from './tweetDto';
-import { TweetEntity } from './db/tweet.entity';
-import { TweetHashtagEntity } from './db/tweetHashtag.entity';
-import { HashtagEntity } from './db/hashtag.entity';
+import { Tweet } from './db/tweet.entity';
+import { TweetHashtag } from './db/tweetHashtag.entity';
+import { Hashtag } from './db/hashtag.entity';
 import { TweetRepository } from './db/tweetRepository';
 import { TweetHashtagRepository } from './db/tweetHashtagRepository';
 import { HashtagRepository } from './db/hashtagRepository';
@@ -53,7 +53,7 @@ export class TweetServiceImpl implements TweetService {
     });
   }
 
-  private async saveHashtags(tweetBody: string): Promise<HashtagEntity[]> {
+  private async saveHashtags(tweetBody: string): Promise<Hashtag[]> {
     const hashtagTexts = tweetBody.match(/#[a-z0-9_]+/g);
 
     const hashtagEntities = hashtagTexts.map(async (text) => {
@@ -64,10 +64,10 @@ export class TweetServiceImpl implements TweetService {
   }
 
   private async saveTweetHashtags(
-    hashtags: HashtagEntity[],
-    tweet: TweetEntity,
+    hashtags: Hashtag[],
+    tweet: Tweet,
     searchHashtagsText: string[],
-  ): Promise<TweetHashtagEntity[]> {
+  ): Promise<TweetHashtag[]> {
     const tweetHashtags = hashtags.map(async (hashtag) => {
       const isSearchHashtag = searchHashtagsText.includes(hashtag.text);
       return this.tweetHashtagRepository.save({

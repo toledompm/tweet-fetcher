@@ -1,14 +1,14 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { TweetHashtagEntity } from './tweetHashtag.entity';
+import { TweetHashtag } from './tweetHashtag.entity';
 
 @Entity({ name: 'hashtags' })
-export class HashtagEntity {
+export class Hashtag {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   text: string;
 
-  @OneToMany(() => TweetHashtagEntity, (tweetHashtag) => tweetHashtag.hashtag)
-  tweets?: TweetHashtagEntity[];
+  @OneToMany(() => TweetHashtag, (tweetHashtag) => tweetHashtag.hashtag)
+  tweets?: TweetHashtag[];
 }

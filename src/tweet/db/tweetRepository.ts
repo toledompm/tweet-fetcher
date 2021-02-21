@@ -1,6 +1,6 @@
 import { TweetDto } from '../tweetDto';
-import { TweetEntity } from './tweet.entity';
+import { Tweet } from './tweet.entity';
 
 export interface TweetRepository {
-  save(tweet: TweetDto): Promise<TweetEntity>;
+  save(tweet: TweetDto): Promise<Tweet>;
 }
