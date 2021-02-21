@@ -1,4 +1,4 @@
-import { IsBoolean } from 'class-validator';
+import { IsBoolean, IsOptional } from 'class-validator';
 import { TweetDto } from './tweetDto';
 import { HashtagDto } from './hashtagDto';
 
@@ -7,6 +7,7 @@ export class TweetHashtagDto {
 
   readonly hashtag?: HashtagDto;
 
+  @IsOptional()
   @IsBoolean()
-  readonly searchHashtag?: boolean;
+  readonly searchHashtag: boolean = false;
 }

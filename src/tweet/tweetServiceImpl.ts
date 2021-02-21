@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { TweetService } from './tweetService';
 import { TweetDto } from './tweetDto';
-import { TweetEntity } from './db/tweetEntity';
-import { TweetHashtagEntity } from './db/tweetHashtagEntity';
-import { HashtagEntity } from './db/hashtagEntity';
+import { TweetEntity } from './db/tweet.entity';
+import { TweetHashtagEntity } from './db/tweetHashtag.entity';
+import { HashtagEntity } from './db/hashtag.entity';
 import { TweetRepository } from './db/tweetRepository';
 import { TweetHashtagRepository } from './db/tweetHashtagRepository';
 import { HashtagRepository } from './db/hashtagRepository';
@@ -17,11 +17,11 @@ import {
 export class TweetServiceImpl implements TweetService {
   constructor(
     @Inject(TWEET_REPOSITORY)
-    private tweetRepository: TweetRepository,
+    private readonly tweetRepository: TweetRepository,
     @Inject(HASHTAG_REPOSITORY)
-    private hashtagRepository: HashtagRepository,
+    private readonly hashtagRepository: HashtagRepository,
     @Inject(TWEET_HASHTAG_REPOSITORY)
-    private tweetHashtagRepository: TweetHashtagRepository,
+    private readonly tweetHashtagRepository: TweetHashtagRepository,
   ) {}
 
   public async saveTweet(tweetDto: TweetDto): Promise<TweetDto> {

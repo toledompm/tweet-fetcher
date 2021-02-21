@@ -15,7 +15,7 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/tweet/:hashtag (POST) | with no requestOptions', (done) => {
+  it('/tweet/:hashtag (POST)', (done) => {
     const hashtag = 'someHashtag';
 
     return request(app.getHttpServer())

@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { TweetEntity } from './tweetEntity';
-import { HashtagEntity } from './hashtagEntity';
+import { TweetEntity } from './tweet.entity';
+import { HashtagEntity } from './hashtag.entity';
 
 @Entity({ name: 'tweet_hashtags' })
 export class TweetHashtagEntity {

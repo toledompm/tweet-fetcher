@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { TweetHashtagEntity } from './tweetHashtagEntity';
+import { TweetHashtagEntity } from './tweetHashtag.entity';
 
 @Entity({ name: 'tweets' })
 export class TweetEntity {
