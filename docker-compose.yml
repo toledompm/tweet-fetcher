@@ -3,7 +3,7 @@ services:
     build:
       context: .
       target: development
-    tty: true
+    command: npm run start:dev
     env_file: 
       - .env
     ports:
@@ -24,5 +24,3 @@ services:
       POSTGRES_PASSWORD: $DB_PASSWORD
     ports:
       - '5432:5432'
-    volumes:
-      - ./tmp/postgres:/var/lib/postgresql/data

@@ -12,7 +12,7 @@ export class TwitterWrapperServiceImpl implements TwitterWrapperService {
   public async getTweetByHashtag(hashtag: string): Promise<TweetDto> {
     const mockTweetDto = {
       twitterId: 1234,
-      body: `this is a tweet with a ${hashtag}`,
+      body: `this is a tweet with a #${hashtag}`,
       hashtags: [{ hashtag: { text: hashtag }, searchHashtag: true }],
     };
 

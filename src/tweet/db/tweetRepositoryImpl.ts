@@ -1,8 +1,8 @@
-import { Repository, Repository } from 'typeorm';
+import { Repository, EntityRepository } from 'typeorm';
 import { Tweet } from './tweet.entity';
 import { TweetRepository } from './tweetRepository';
 
-@Repository(Tweet)
+@EntityRepository(Tweet)
 export class TweetRepositoryImpl
   extends Repository<Tweet>
   implements TweetRepository {}
