@@ -1,25 +1,23 @@
 import { Test } from '@nestjs/testing';
 import { TweetService } from '../../src/tweet/tweetService';
-import { TweetRepository } from '../../src/tweet/db/tweetRepository';
-import { TweetHashtagRepository } from '../../src/tweet/db/tweetHashtagRepository';
-import { HashtagRepository } from '../../src/tweet/db/hashtagRepository';
 import { TweetServiceImpl } from '../../src/tweet/tweetServiceImpl';
 import { TweetDto } from '../../src/tweet/tweetDto';
+import { TWEET_SERVICE } from '../../src/common/consts';
 import {
-  TWEET_SERVICE,
-  TWEET_REPOSITORY,
-  HASHTAG_REPOSITORY,
-  TWEET_HASHTAG_REPOSITORY,
-} from '../../src/common/consts';
-import { TweetRepositoryMock } from '../mocks/tweetRepositoryMock';
-import { TweetHashtagRepositoryMock } from '../mocks/tweetHashtagRepositoryMock';
-import { HashtagRepositoryMock } from '../mocks/hashtagRepositoryMock';
+  repositoryMockFactory,
+  MockType,
+} from '../mocks/repositoryMockFactory';
+import { Tweet } from '../../src/tweet/db/tweet.entity';
+import { Hashtag } from '../../src/tweet/db/hashtag.entity';
+import { TweetHashtag } from '../../src/tweet/db/tweetHashtag.entity';
+import { Repository } from 'typeorm';
+import { getRepositoryToken } from '@nestjs/typeorm';
 
 describe('TweetServiceImpl', () => {
   let tweetService: TweetService;
-  let tweetRepository: TweetRepository;
-  let tweetHashtagRepository: TweetHashtagRepository;
-  let hashtagRepository: HashtagRepository;
+  let tweetRepository: MockType<Repository<Tweet>>;
+  let tweetHashtagRepository: MockType<Repository<Hashtag>>;
+  let hashtagRepository: MockType<Repository<TweetHashtag>>;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -29,32 +27,43 @@ describe('TweetServiceImpl', () => {
           useClass: TweetServiceImpl,
         },
         {
-          provide: TWEET_REPOSITORY,
-          useClass: TweetRepositoryMock,
+          provide: getRepositoryToken(Tweet),
+          useFactory: repositoryMockFactory,
         },
         {
-          provide: HASHTAG_REPOSITORY,
-          useClass: TweetHashtagRepositoryMock,
+          provide: getRepositoryToken(Hashtag),
+          useFactory: repositoryMockFactory,
         },
         {
-          provide: TWEET_HASHTAG_REPOSITORY,
-          useClass: HashtagRepositoryMock,
+          provide: getRepositoryToken(TweetHashtag),
+          useFactory: repositoryMockFactory,
         },
       ],
     }).compile();
 
     tweetService = moduleRef.get<TweetService>(TWEET_SERVICE);
-    tweetRepository = moduleRef.get<TweetRepository>(TWEET_REPOSITORY);
-    tweetHashtagRepository = moduleRef.get<TweetHashtagRepository>(
-      HASHTAG_REPOSITORY,
-    );
-    hashtagRepository = moduleRef.get<HashtagRepository>(
-      TWEET_HASHTAG_REPOSITORY,
-    );
+    tweetRepository = moduleRef.get(getRepositoryToken(Tweet));
+    tweetHashtagRepository = moduleRef.get(getRepositoryToken(Hashtag));
+    hashtagRepository = moduleRef.get(getRepositoryToken(TweetHashtag));
 
-    tweetRepository.save = jest.fn(tweetRepository.save);
-    tweetHashtagRepository.save = jest.fn(tweetHashtagRepository.save);
-    hashtagRepository.save = jest.fn(hashtagRepository.save);
+    tweetRepository.save = jest.fn().mockImplementation(async (tweet) => {
+      return Promise.resolve({
+        ...tweet,
+        id: 1,
+        hashtags: tweet.hashtags.map(() => new TweetHashtag()),
+      });
+    });
+
+    tweetHashtagRepository.save = jest.fn().mockImplementation(async () => {
+      return Promise.resolve(new TweetHashtag());
+    });
+
+    hashtagRepository.save = jest.fn().mockImplementation(async (hashtag) => {
+      return Promise.resolve({
+        ...hashtag,
+        id: 1,
+      });
+    });
   });
 
   describe('save tweet with hashtags', () => {
