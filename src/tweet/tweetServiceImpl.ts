@@ -28,25 +28,30 @@ export class TweetServiceImpl implements TweetService {
       (tweetHashtag) => tweetHashtag.hashtag.text,
     );
 
-    const tweet = await this.tweetRepository.save(tweetDto);
-    const hashtags = await this.saveHashtags(tweetDto.body);
-    const tweethashtags = await this.saveTweetHashtags(
-      hashtags,
-      tweet,
-      searchHashtagsText,
-    );
+    try {
+      const tweet = await this.tweetRepository.save(tweetDto);
+      const hashtags = await this.saveHashtags(tweetDto.body);
+      const tweethashtags = await this.saveTweetHashtags(
+        hashtags,
+        tweet,
+        searchHashtagsText,
+      );
 
-    const dtoHashtags = tweethashtags.map((tweetHashtag) => {
-      return {
-        text: tweetHashtag.hashtag.text,
-        searchHashtag: tweetHashtag.searchHashtag,
-      };
-    });
+      const dtoHashtags = tweethashtags.map((tweetHashtag) => {
+        return {
+          text: tweetHashtag.hashtag.text,
+          searchHashtag: tweetHashtag.searchHashtag,
+        };
+      });
 
-    return Promise.resolve({
-      ...tweetDto,
-      hashtags: dtoHashtags,
-    });
+      return Promise.resolve({
+        ...tweetDto,
+        hashtags: dtoHashtags,
+      });
+    } catch (error) {
+      console.log(error);
+      throw new Error('Failed to save Entities');
+    }
   }
 
   private async saveHashtags(tweetBody: string): Promise<Hashtag[]> {
