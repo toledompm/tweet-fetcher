@@ -43,7 +43,7 @@ example response:
 
 ```
 {
-    "twitterId": 1234,
+    "twitterId": "1234",
     "body": "this is a tweet with a #hashtag",
     "hashtags": [
         {

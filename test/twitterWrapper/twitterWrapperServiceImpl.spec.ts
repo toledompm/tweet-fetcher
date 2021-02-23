@@ -28,6 +28,20 @@ describe('TwitterWrapperServiceImpl', () => {
     twitterWrapperService = moduleRef.get<TwitterWrapperService>(
       TWITTER_WRAPPER_SERVICE,
     );
+
+    twitterWrapperService.twitterClient = {
+      get: jest.fn().mockReturnValue({
+        statuses: [
+          {
+            body: 'this is a real #tweet with #someHashtag',
+            hashtags: [
+              { hashtag: { text: 'someHashtag' }, searchHashtag: true },
+            ],
+            twitterId: '123456',
+          },
+        ],
+      }),
+    };
   });
 
   describe('findTweetByHashtag', () => {

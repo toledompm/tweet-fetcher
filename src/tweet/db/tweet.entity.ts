@@ -10,7 +10,7 @@ export class Tweet {
   body: string;
 
   @Column({ name: 'twitter_id' })
-  twitterId: number;
+  twitterId: string;
 
   @OneToMany(() => TweetHashtag, (tweetHashtag) => tweetHashtag.tweet)
   hashtags?: TweetHashtag[];

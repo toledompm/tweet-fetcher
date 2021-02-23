@@ -6,7 +6,7 @@ export class createTweetTable1613913223859 implements MigrationInterface {
       `CREATE TABLE IF NOT EXISTS tweets (
           id serial PRIMARY KEY,
           body varchar(240),
-          twitter_id bigint
+          twitter_id varchar(20)
       )`,
     );
   }

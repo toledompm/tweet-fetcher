@@ -3,7 +3,7 @@ import { TweetHashtagDto } from './tweetHashtagDto';
 
 export class TweetDto {
   @IsString()
-  readonly twitterId: number;
+  readonly twitterId: string;
 
   @IsString()
   readonly body: string;
