@@ -22,6 +22,6 @@ const allProviders = () => {
 @Module({
   imports: [TypeOrmModule.forFeature([Tweet, TweetHashtag, Hashtag])],
   providers: allProviders(),
-  exports: allProviders(),
+  exports: exportedProviders,
 })
 export class TweetModule {}
