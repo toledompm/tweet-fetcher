@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(
   () => ({
     save: jest.fn(),
+    findOne: jest.fn(),
   }),
 );
 

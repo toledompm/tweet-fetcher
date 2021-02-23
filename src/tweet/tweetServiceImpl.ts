@@ -30,7 +30,7 @@ export class TweetServiceImpl implements TweetService {
 
     try {
       const tweet = await this.tweetRepository.save(tweetDto);
-      const hashtags = await this.saveHashtags(tweetDto.body);
+      const hashtags = await this.findOrSaveHashtags(tweetDto.body);
       const tweethashtags = await this.saveTweetHashtags(
         hashtags,
         tweet,
@@ -49,19 +49,25 @@ export class TweetServiceImpl implements TweetService {
         hashtags: dtoHashtags,
       });
     } catch (error) {
+      console.log(tweetDto);
       console.log(error);
       throw new Error('Failed to save Entities');
     }
   }
 
-  private async saveHashtags(tweetBody: string): Promise<Hashtag[]> {
-    const hashtagTexts = tweetBody.match(/#[a-z0-9_]+/g);
+  private async findOrSaveHashtags(tweetBody: string): Promise<Hashtag[]> {
+    const hashtagTexts = tweetBody.match(/#[A-z0-9_]+/g);
 
-    const hashtagEntities = hashtagTexts.map(async (text) => {
-      return this.hashtagRepository.save({ text });
-    });
+    const hashtagEntities = hashtagTexts.map(
+      async (text): Promise<Hashtag> => {
+        const hashtagResponse = await this.hashtagRepository.findOne({ text });
+        if (hashtagResponse) return hashtagResponse;
 
-    return await Promise.all(hashtagEntities);
+        return this.hashtagRepository.save({ text });
+      },
+    );
+
+    return Promise.all(hashtagEntities);
   }
 
   private async saveTweetHashtags(

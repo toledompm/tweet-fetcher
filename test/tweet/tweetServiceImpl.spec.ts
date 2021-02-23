@@ -68,14 +68,16 @@ describe('TweetServiceImpl', () => {
 
   describe('save tweet with hashtags', () => {
     let resultTweetDto: TweetDto;
+
+    const NUMBER_OF_HASHTAGS = 2;
+
     const hashtag = { text: '#hashtags' };
     const tweetHashtagDto = { hashtag, searchHashtag: true };
     const tweetDto = {
       body: 'This is a #tweet with 2 #hashtags',
-      twitterId: 123456789,
+      twitterId: '123456789',
       hashtags: [tweetHashtagDto],
     };
-    const numberOfHashtags = 2;
 
     beforeEach(async () => {
       resultTweetDto = await tweetService.saveTweet(tweetDto);
@@ -85,18 +87,18 @@ describe('TweetServiceImpl', () => {
       expect(tweetRepository.save).toHaveBeenCalledWith(tweetDto);
     });
 
-    it(`should save ${numberOfHashtags} hashtags`, () => {
-      expect(hashtagRepository.save).toHaveBeenCalledTimes(numberOfHashtags);
+    it(`should save ${NUMBER_OF_HASHTAGS} hashtags`, () => {
+      expect(hashtagRepository.save).toHaveBeenCalledTimes(NUMBER_OF_HASHTAGS);
     });
 
-    it(`should save ${numberOfHashtags} tweetHashtag relation`, () => {
+    it(`should save ${NUMBER_OF_HASHTAGS} tweetHashtag relation`, () => {
       expect(tweetHashtagRepository.save).toHaveBeenCalledTimes(
-        numberOfHashtags,
+        NUMBER_OF_HASHTAGS,
       );
     });
 
-    it(`should return the tweetDto with ${numberOfHashtags} relations`, () => {
-      expect(resultTweetDto.hashtags.length).toBe(numberOfHashtags);
+    it(`should return the tweetDto with ${NUMBER_OF_HASHTAGS} relations`, () => {
+      expect(resultTweetDto.hashtags.length).toBe(NUMBER_OF_HASHTAGS);
     });
   });
 });
