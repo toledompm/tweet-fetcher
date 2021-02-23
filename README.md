@@ -1,6 +1,6 @@
 ## Description
 
-API to fetch and save tweets that contain a give #hashtag
+API to fetch and save tweets that contain a given #hashtag
 
 ## Setup
 
