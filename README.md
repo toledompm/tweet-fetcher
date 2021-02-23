@@ -2,6 +2,17 @@
 
 API to fetch and save tweets that contain a give #hashtag
 
+## Setup
+
+```bash
+# This application requires some auth keys from the twitter api
+# You can fill them out in the .env file
+TWITTER_ACCESS_TOKEN=
+TWITTER_ACCESS_TOKEN_SECRET=
+TWITTER_API_KEY=
+TWITTER_API_KEY_SECRET=
+```
+
 ## Installation
 
 ```bash
@@ -47,7 +58,7 @@ example response:
     "body": "this is a tweet with a #hashtag",
     "hashtags": [
         {
-            "text": "#hashtag",
+            "text": "hashtag",
             "searchHashtag": true
         }
     ],
